@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Directory</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Employee Directory</h1>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search by name or email">
+      <button onclick="SearchEmp()">Filter</button>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div>
+      <label>Sort:
+        <select id="sortBy" onchange="sortEmp()">
+          <option value="">--Select--</option>
+          <option value="firstName">First Name</option>
+          <option value="department">Department</option>
+        </select>
+      </label>
+      <label>Show:
+        <select id="perPage" onchange="renderEmployees()">
+          <option>10</option>                                   
+          <option>25</option>
+          <option>50</option>
+        </select>
+      </label>
+    </div>
+    <button id="addBtn" onclick="AddEmp()">Add Employee</button>
+  </div>
+
+  <div id="employeeList" class="employee-grid">
+   <!-- <#list employees as emp>-->
+      <div class="employee-card" data-id="${emp.id}">
+        <strong>${emp.firstName} ${emp.lastName}</strong>
+        <p><strong>Email:</strong> ${emp.email}</p>
+        <p><strong>Department:</strong> ${emp.department}</p>
+        <p><strong>Role:</strong> ${emp.role}</p>
+        <button onclick="editEmployee(${emp.id})" class="edit-btn">Edit</button>
+        <button onclick="deleteEmployee(${emp.id})" class="delete-btn">Delete</button>
+      </div>
+   <!-- </#list>-->
+  </div>
+
+
+  <div id="modal" class="modal hidden">
+    <form id="employeeForm" onsubmit="submitForm(event)">
+      <h2 id="formTitle">Add Employee</h2>
+      <input type="hidden" id="empId" />
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" required />
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" required />
+    <label label for="department">Department:</label>
+      <select id="department" required>
+          <option value="">--Select--</option>
+          <option value="IT">IT</option>
+          <option value="Finance">Finance</option>
+          <option value="HR">HR</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Sales">Sales</option>
+          <option value="Customer Support">Customer Support</option>
+          <option value="Product Development">Product Development</option>
+
+        </select>
+        <label laabel for="role">Role:</label>
+      <input type="text" id="role"  required />
+      <div class="form-actions">
+        <button type="button" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="add-btn">Add</button>
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    © 2025 Employee Directory App. All rights reserved.
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
